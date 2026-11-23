@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sistema Académico</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5fb;--card:#fff;--tx:#161a2e;--mut:#6a7391;--bd:#e4e8f3;--pri:#4f46e5;--pri2:#9333ea;--ok:#16a34a;--err:#dc2626;--sh:0 4px 20px rgba(40,50,110,.07)}
+@media(prefers-color-scheme:dark){:root{--bg:#0c0f1d;--card:#161a2e;--tx:#eef0fb;--mut:#9aa3c7;--bd:#262b47;--sh:0 4px 20px rgba(0,0,0,.3)}}
+*{box-sizing:border-box}body{margin:0;font:15px Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);display:flex;min-height:100vh}
+nav{width:240px;background:var(--card);border-right:1px solid var(--bd);padding:22px 14px;position:sticky;top:0;height:100vh;flex-shrink:0}
+.logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:18px;margin:0 8px 28px}
+.logo b{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:grid;place-items:center;font-size:20px}
+nav button{display:flex;gap:12px;align-items:center;width:100%;background:none;border:0;color:var(--mut);padding:12px 14px;border-radius:12px;font:600 14px Inter;cursor:pointer;margin-bottom:4px;text-align:left}
+nav button:hover{background:var(--bg);color:var(--tx)}
+nav button.on{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;box-shadow:0 6px 16px rgba(79,70,229,.35)}
+main{flex:1;min-width:0;padding:28px 36px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+h2{margin:0;font-size:28px;font-weight:800;letter-spacing:-.5px}.sub{color:var(--mut);margin:4px 0 0}
+.who{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:99px;padding:6px 8px 6px 6px;box-shadow:var(--sh)}
+.av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;display:grid;place-items:center;font-weight:700}
+.who select{border:0;background:none;font:600 14px Inter;color:var(--tx);outline:0;cursor:pointer;padding-right:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px;box-shadow:var(--sh);transition:.2s}
+.hov:hover{transform:translateY(-3px)}
+.stat{display:flex;gap:16px;align-items:center}.ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:24px}
+.stat .n{font-size:30px;font-weight:800;line-height:1}.stat .l{color:var(--mut);font-size:13px;margin-top:4px}
+.bar{height:9px;background:var(--bd);border-radius:9px;overflow:hidden;margin:12px 0 6px}.bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--pri),var(--pri2))}.bar.full i{background:var(--err)}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--bg);color:var(--mut);margin:2px 4px 2px 0}
+.INSCRITO{background:#dbeafe;color:#1d4ed8}.APROBADO{background:#dcfce7;color:#15803d}.REPROBADO{background:#fee2e2;color:#b91c1c}.RETIRADO{background:#e5e7eb;color:#4b5563}
+.b,input,select.f{font:inherit;border-radius:12px;border:1px solid var(--bd);padding:10px 14px;background:var(--card);color:var(--tx);outline:0}
+input:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(79,70,229,.15)}
+.b{background:var(--pri);color:#fff;border:0;cursor:pointer;font-weight:700}.b:hover{filter:brightness(1.1)}.b.sec{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}.b.red{background:#fee2e2;color:#b91c1c;border:0}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.mt{margin-top:14px}
+.big{font-size:38px;font-weight:800;background:linear-gradient(90deg,var(--pri),var(--pri2));-webkit-background-clip:text;color:transparent}
+.tt{display:grid;grid-template-columns:54px repeat(6,1fr);background:var(--card);border:1px solid var(--bd);border-radius:20px;overflow:auto;box-shadow:var(--sh);min-width:640px}
+.tt .h{padding:12px;text-align:center;font-weight:700;font-size:13px;border-bottom:1px solid var(--bd);color:var(--mut)}
+.tt .hr{position:relative;border-right:1px solid var(--bd);height:672px}.tt .hr span{position:absolute;right:6px;font-size:11px;color:var(--mut);transform:translateY(-50%)}
+.tt .d{position:relative;height:672px;border-right:1px solid var(--bd);background:repeating-linear-gradient(var(--card) 0 47px,var(--bd) 47px 48px)}
+.ev{position:absolute;left:4px;right:4px;border-radius:12px;padding:8px 10px;color:#fff;font-size:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.ev b{display:block;font-size:13px}
+.empty{text-align:center;color:var(--mut);padding:50px 20px}.empty div{font-size:46px}
+.warn{background:#fef3c7;color:#92400e;padding:14px 18px;border-radius:14px;margin-bottom:20px;font-weight:600}
+#toast{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:8px;z-index:9}
+.t{padding:14px 18px;border-radius:14px;color:#fff;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:340px;animation:in .25s}
+@keyframes in{from{transform:translateY(14px);opacity:0}}
+@media(max-width:800px){body{flex-direction:column}nav{width:100%;height:auto;position:static;display:flex;overflow:auto;padding:10px;border:0}.logo{display:none}nav button{width:auto;white-space:nowrap;margin:0 4px 0 0}main{padding:18px}}
+</style></head><body>
+<nav><div class="logo"><b>🎓</b>Académico <small style="font-weight:600;color:var(--mut);font-size:11px">v3</small></div>
+<button data-v="panel" class="on">📊 Panel</button><button data-v="mat">📝 Matricular</button>
+<button data-v="hor">🗓️ Mi horario</button><button data-v="not">🏅 Notas</button><button data-v="est">👥 Estudiantes</button></nav>
+<main><div id="warn"></div><header><div><h2 id="ttl"></h2><p class="sub" id="sub"></p></div>
+<div class="who" id="who"></div></header><div id="app"></div></main><dialog id="dlg" style="border:0;border-radius:20px;padding:26px;background:var(--card);color:var(--tx);box-shadow:0 20px 60px rgba(0,0,0,.35)">
+<h3 style="margin-top:0">✏️ Cambiar horario</h3><div class="row" style="flex-direction:column;align-items:stretch">
+<label>Día<select id="hd" class="f" style="width:100%">${""}</select></label>
+<label>Hora de inicio<input id="ha" type="time" style="width:100%"></label><label>Hora de fin<input id="hb" type="time" style="width:100%"></label></div>
+<div class="row mt"><button class="b" onclick="saveH()">Guardar</button><button class="b sec" onclick="$('#dlg').close()">Cancelar</button><button class="b red" onclick="borrarH()">🗑️ Eliminar</button></div></dialog><div id="toast"></div>
+<script>
+const DIAS=["","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"],$=s=>document.querySelector(s);
+const COL=["#4f46e5","#16a34a","#d97706","#db2777","#0891b2","#9333ea"];
+const T={panel:["Panel general","Resumen del periodo activo"],mat:["Matricular","Elige una materia. La base de datos valida cupos, choques y prerrequisitos."],
+hor:["Mi horario","Vista semanal de las materias inscritas"],not:["Notas y materias","La nota final se calcula sola según los pesos (máx. 100%)"],est:["Estudiantes","Registro de estudiantes"]};
+$("#hd").innerHTML=DIAS.slice(1,7).map((d,i)=>`<option value="${i+1}">${d}</option>`).join("");
+let est=[],sel=+localStorage.est||0,view="panel",q="";
+if(location.protocol=="file:")$("#warn").innerHTML='<div class="warn">⚠️ Abriste el archivo directo. Abre <b>http://127.0.0.1:8000</b> con el servidor encendido.</div>';
+const api=async(u,m="GET",b)=>{const r=await fetch("/api"+u,{method:m,headers:{"Content-Type":"application/json"},body:b?JSON.stringify(b):undefined});
+ const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(typeof d.detail=="string"?d.detail:"Revisa los datos ingresados");return d};
+function toast(m,ok=1){const e=document.createElement("div");e.className="t";e.style.background=ok?"#16a34a":"#dc2626";e.textContent=(ok?"✔ ":"✖ ")+m;$("#toast").append(e);setTimeout(()=>e.remove(),4500)}
+const act=async(f,m,after)=>{try{await f();toast(m);after?after():render()}catch(e){toast(e.message,0)}};
+const hor=h=>h.map(x=>`<span class="tag" style="cursor:pointer" title="Clic para cambiar la hora" onclick="editH(${x.id},${x.dia},'${x.hora_inicio}','${x.hora_fin}')">✏️ ${DIAS[x.dia].slice(0,3)} ${x.hora_inicio}–${x.hora_fin}</span>`).join("");
+const borrar=(u,m,ok)=>{if(confirm(m))act(()=>api(u,"DELETE"),ok)};
+async function borrarH(){if(!confirm("¿Eliminar este horario?"))return;const m=$("#dlg");try{await api("/horarios/"+m.dataset.id,"DELETE");m.close();toast("Horario eliminado");render()}catch(e){toast(e.message,0)}}
+async function borrarE(id){if(!confirm("¿Eliminar este estudiante con sus matrículas y notas?"))return;try{await api("/estudiantes/"+id,"DELETE");est=await api("/estudiantes");if(!est.find(x=>x.id==sel))sel=est[0]?.id;localStorage.est=sel;toast("Estudiante eliminado");render()}catch(e){toast(e.message,0)}}
+function editH(id,d,a,b){const m=$("#dlg");m.dataset.id=id;$("#hd").value=d;$("#ha").value=a;$("#hb").value=b;m.showModal()}
+async function saveH(){const m=$("#dlg");try{await api("/horarios/"+m.dataset.id,"PUT",{dia:+$("#hd").value,hora_inicio:$("#ha").value,hora_fin:$("#hb").value});m.close();toast("Horario actualizado");render()}catch(e){toast(e.message,0)}}
+const pct=x=>Math.min(100,x.inscritos/x.cupo_max*100);
+function who(){const c=est.find(e=>e.id==sel);$("#who").innerHTML=c?`<div class="av">${c.nombres[0]}${c.apellidos[0]}</div>
+<select onchange="sel=+this.value;localStorage.est=sel;render()">${est.map(e=>`<option value="${e.id}" ${e.id==sel?"selected":""}>${e.nombres} ${e.apellidos}</option>`).join("")}</select>`:""}
+const V={
+async panel(){const [r,s]=await Promise.all([api("/resumen"),api("/secciones")]);
+ const st=[["👥","Estudiantes",r.estudiantes,"#e0e7ff"],["📚","Secciones",r.secciones,"#dcfce7"],["📝","Matrículas activas",r.matriculas,"#fef3c7"],["⭐","Promedio general",r.promedio??"–","#fce7f3"]];
+ return `<div class="grid">${st.map(([i,l,n,c])=>`<div class="card stat hov"><div class="ic" style="background:${c}">${i}</div><div><div class="n">${n}</div><div class="l">${l}</div></div></div>`).join("")}</div>
+ <h3 style="margin:30px 0 14px">Ocupación de cupos</h3><div class="grid">${s.map(x=>`<div class="card hov"><b>${x.nombre}</b> <span class="tag">${x.codigo}-${x.paralelo}</span>
+ <div class="bar ${x.inscritos>=x.cupo_max?"full":""}"><i style="width:${pct(x)}%"></i></div><small class="sub">${x.inscritos} de ${x.cupo_max} cupos · Aula ${x.aula} · ${x.docente}</small></div>`).join("")}</div>`},
+async mat(){const [s,m]=await Promise.all([api("/secciones"),api("/matriculas?estudiante_id="+sel)]);
+ const mine=new Set(m.filter(x=>x.estado=="INSCRITO").map(x=>x.seccion_id));
+ const l=s.filter(x=>(x.nombre+x.codigo+x.docente).toLowerCase().includes(q.toLowerCase()));
+ return `<input placeholder="🔍 Buscar materia o docente…" value="${q}" oninput="q=this.value;clearTimeout(window.tm);window.tm=setTimeout(()=>{render().then(()=>{const i=$('input');i.focus();i.setSelectionRange(q.length,q.length)})},250)" style="width:100%;max-width:420px;margin-bottom:20px">
+ <div class="grid">${l.map(x=>{const lleno=x.inscritos>=x.cupo_max,ya=mine.has(x.id);return `<div class="card hov"><div class="row" style="justify-content:space-between"><span class="tag">${x.codigo}-${x.paralelo}</span><span class="tag">${x.creditos} créditos</span></div>
+ <h3 style="margin:10px 0 2px">${x.nombre}</h3><div class="sub">👨‍🏫 ${x.docente} · 🏫 ${x.aula}</div><div class="mt">${hor(x.horarios)}${x.prerrequisitos.map(p=>`<span class="tag" style="background:#fef3c7;color:#92400e">Requiere: ${p}</span>`).join("")}</div>
+ <div class="bar ${lleno?"full":""}"><i style="width:${pct(x)}%"></i></div><small class="sub">${lleno?"Sin cupos":x.cupo_max-x.inscritos+" cupos libres"}</small>
+ <div class="row mt"><button class="b" ${ya||lleno?"disabled style='opacity:.45;cursor:not-allowed'":""} onclick="act(()=>api('/matriculas','POST',{estudiante_id:sel,seccion_id:${x.id}}),'Matrícula realizada')">${ya?"Ya inscrito":"Matricular"}</button>
+ <button class="b sec" onclick="if(confirm('¿Cerrar la sección? Aprueba con nota ≥ 7'))act(()=>api('/secciones/${x.id}/cerrar','POST'),'Sección cerrada')">Cerrar</button><button class="b red" onclick="borrar('/secciones/${x.id}','¿Eliminar esta materia? Se borran también sus matrículas y notas.','Materia eliminada')">🗑️ Eliminar</button></div></div>`}).join("")}</div>`},
+async hor(){const [s,m]=await Promise.all([api("/secciones"),api("/matriculas?estudiante_id="+sel)]);
+ const ins=m.filter(x=>x.estado=="INSCRITO");if(!ins.length)return `<div class="card empty"><div>🗓️</div><p>Este estudiante aún no tiene materias inscritas.</p></div>`;
+ let cols="";for(let d=1;d<=6;d++){cols+=`<div class="d">`+ins.map(x=>{const sc=s.find(z=>z.id==x.seccion_id);return sc.horarios.filter(h=>h.dia==d).map(h=>{const a=h.hora_inicio.split(":"),b=h.hora_fin.split(":");
+  const top=(+a[0]+a[1]/60-7)*48,hh=((+b[0]+b[1]/60)-(+a[0]+a[1]/60))*48;return `<div class="ev" style="top:${top}px;height:${hh-3}px;background:${COL[sc.id%6]}"><b>${sc.nombre}</b>${h.hora_inicio}–${h.hora_fin} · ${sc.aula}</div>`}).join("")}).join("")+`</div>`}
+ let hrs="";for(let h=7;h<=21;h++)hrs+=`<span style="top:${(h-7)*48}px">${h}:00</span>`;
+ return `<div style="overflow-x:auto"><div class="tt"><div class="h"></div>${DIAS.slice(1,7).map(d=>`<div class="h">${d}</div>`).join("")}<div class="hr">${hrs}</div>${cols}</div></div>`},
+async not(){const m=await api("/matriculas?estudiante_id="+sel);
+ if(!m.length)return `<div class="card empty"><div>📚</div><p>Sin matrículas todavía. Ve a «Matricular».</p></div>`;
+ return `<div class="grid">${m.map(x=>{const p=x.notas.reduce((a,n)=>a+n.peso,0);return `<div class="card hov"><div class="row" style="justify-content:space-between"><b>${x.materia}</b><span class="tag ${x.estado}">${x.estado}</span></div>
+ <div class="big mt">${x.nota_final??"–"}</div><small class="sub">Nota final · ${p}% evaluado</small>
+ <div class="bar"><i style="width:${p}%"></i></div>${x.notas.map(n=>`<span class="tag">${n.descripcion}: ${n.nota} (${n.peso}%)</span>`).join("")}
+ ${x.estado=="INSCRITO"?`<form class="row mt" onsubmit="event.preventDefault();const f=this;act(()=>api('/calificaciones','POST',{matricula_id:${x.id},descripcion:f.d.value,nota:+f.n.value,peso:+f.p.value}),'Nota guardada')">
+ <input name="d" placeholder="Actividad" required style="flex:1;min-width:100px"><input name="n" type="number" step=".01" min=0 max=10 placeholder="Nota" required style="width:80px"><input name="p" type="number" step=".01" min=1 max=100 placeholder="%" required style="width:75px"><button class="b">+</button></form>
+ <button class="b red mt" onclick="act(()=>api('/matriculas/${x.id}','DELETE'),'Materia retirada')">Retirar materia</button>`:""}</div>`}).join("")}</div>`},
+async est(){return `<div class="card" style="max-width:640px;margin-bottom:24px"><h3 style="margin-top:0">➕ Nuevo estudiante</h3>
+ <form class="row" onsubmit="event.preventDefault();const f=this;act(async()=>{await api('/estudiantes','POST',{cedula:f.c.value,nombres:f.n.value,apellidos:f.a.value,email:f.e.value});est=await api('/estudiantes')},'Estudiante creado',()=>{who();render()})">
+ <input name="c" placeholder="Cédula" required><input name="n" placeholder="Nombres" required><input name="a" placeholder="Apellidos" required><input name="e" type="email" placeholder="Correo" required><button class="b">Guardar</button></form></div>
+ <div class="grid">${est.map(e=>`<div class="card hov stat"><div class="av" style="width:48px;height:48px">${e.nombres[0]}${e.apellidos[0]}</div><div><b>${e.nombres} ${e.apellidos}</b><div class="l sub">${e.cedula}<br>${e.email}</div></div><button class="b red" style="margin-left:auto" title="Eliminar" onclick="borrarE(${e.id})">🗑️</button></div>`).join("")}</div>`}};
+async function render(){$("#ttl").textContent=T[view][0];$("#sub").textContent=T[view][1];who();try{$("#app").innerHTML=await V[view]()}catch(e){toast(e.message,0)}}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));b.classList.add("on");view=b.dataset.v;render()});
+api("/estudiantes").then(e=>{est=e;if(!est.find(x=>x.id==sel))sel=est[0]?.id;render()}).catch(e=>toast("No hay conexión con el servidor",0));
+</script></body></html>
