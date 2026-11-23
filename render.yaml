@@ -1,5 +1,0 @@
-services:
-  - type: web
-    name: sistema-academico
-    runtime: docker
-    plan: free
